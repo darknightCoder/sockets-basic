@@ -7,15 +7,23 @@ socket.on('message',function(message){
 	console.log(message.text);
 	remoteMessage=message.text;
 });	*/
+
+
 //handles submmitting the new messages
 var app=angular.module('myApp',[]);
 
 app.controller('chatCtrl',function($scope,socket){
-	
+	 
+	 $scope.myMessage=[]
 
    $scope.messageFreind=[
-      'hii'
+      'hii this is a group chat'
                         ];
+                        $scope.randomDate = function() {
+    
+    
+    return new Date();
+  }
 socket.on('connect',function(){
 	console.log('Connected')
 });
@@ -27,10 +35,12 @@ socket.on('message',function(message){
 $scope.addThis=function(){
 	socket.emit('message',{
 		text:$scope.text,
-
+       
 		
 	});
-	$scope.myMessage=$scope.text
+	$scope.messageFreind.push($scope.text);
+
+	$scope.text='';
 }
 
 });
